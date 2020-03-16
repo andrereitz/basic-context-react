@@ -6,15 +6,36 @@ export const MyContext = React.createContext();
 // Create the provider
 export class MyProvider extends Component{
     state = {
-        name: 'Andre',
-        age: 31,
-        cool: true
+        people:[
+            {
+                name: 'Andre',
+                age: 31,
+                cool: true
+            },
+            {
+                name: 'Mark',
+                age: 18,
+                cool: false
+            },
+            {
+                name: 'John',
+                age: 29,
+                cool: true
+            }
+        ]
     }
 
     increaseOneYear = (name) =>{
         console.log('increasing one year of', name);
-        // console.log(props);
-        this.setState({ age: this.state.age + 1 })
+        this.setState({ people: this.state.people.map( person => {
+                if(person.name === name){
+                    person.age = person.age + 1;
+                }
+
+                return person;
+            }) 
+        })
+        console.log(this.state);
     }
     render(){
         return(
